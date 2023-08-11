@@ -1,0 +1,27 @@
+body{
+  background-color: rgb(168, 168, 252);
+}
+.win-wrapper{
+  position: absolute;
+  background-color: #363333;
+
+  border: 1px solid rgb(235, 235, 235);
+
+  height: 240px;
+  width: 350px;
+
+  border-radius: 7px;
+}
+
+.menu{
+  position: absolute;
+  bottom: 0;
+  background-color: black;
+  height: 15px;
+  width: 100%;
+  border-radius: 0 0 7px 7px;
+}
+
+.no-select {
+  user-select: none;
+}
