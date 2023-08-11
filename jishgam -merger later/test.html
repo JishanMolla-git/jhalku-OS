@@ -18,9 +18,7 @@
         $(".draggable").draggable({ handle: ".menu" });
 
         $(".draggable").on("click", function () {
-          // Increase the z-index to bring the clicked div to the front
           $(this).css("z-index", 9999);
-          // Reset the z-index of other divs
           $(".draggable").not(this).css("z-index", "");
         });
       });
