@@ -7,54 +7,34 @@
     <style></style>
     <script>
       $(document).ready(function () {
-        // Flag to track if the window is created
-        var windowCreated = false;
+        // Create the window element in advance and initially hide it
+        var windowElement = $("<div>")
+          .addClass("window draggable win-wrapper")
+          .html(
+            '<div class="menu" autofocus><button class="close button"></button><button class="min button"></button><button class="max button"></button></div>'
+          )
+          .hide();
 
-        // Reference to the window element
-        var windowElement = null;
+        // Append the window to the body
+        $("body").append(windowElement);
 
-        $(".draggable").draggable({
-          handle: ".menu",
-          start: function (event, ui) {
-            // When dragging starts, set the z-index of the current element
-            $(this).css("z-index", 9999);
-            // Reset z-index for other draggable elements
-            $(".draggable").not(this).css("z-index", "");
-          },
+        // Make the window draggable
+        windowElement.draggable({ handle: ".menu" });
+
+        // Hide the window when clicking the "Close" button
+        windowElement.find(".close").on("click", function () {
+          windowElement.hide();
         });
 
-        $(".draggable").on("click", function () {
-          $(this).css("z-index", 9999);
-
-          $(".draggable").not(this).css("z-index", "");
-        });
-
+        // Show or hide the pre-created window when the "app" button is clicked
         $(".app").on("click", function () {
-          if (!windowCreated) {
-            // Create a new window element
-            windowElement = $("<div>")
-              .addClass("window draggable win-wrapper")
-              .html(
-                '<div class="menu" autofocus><button class="close button"></button><button class="min button"></button><button class="max button"></button></div>'
-              );
-
-            $("body").append(windowElement);
-
-            windowElement.draggable({ handle: ".menu" });
-
-            windowElement.find(".close").on("click", function () {
-              windowElement.hide();
-            });
-
-            windowCreated = true;
-          } else {
-            windowElement.toggle();
-          }
+          windowElement.toggle();
         });
       });
     </script>
   </head>
   <body>
+    <!-- Button to show/hide the window -->
     <button class="app">Show App</button>
   </body>
 </html>
