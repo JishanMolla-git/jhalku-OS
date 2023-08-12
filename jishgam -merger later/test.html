@@ -2,37 +2,39 @@
 <html>
   <head>
     <link rel="stylesheet" href="window.css" />
-    <style>
-      .no-select {
-        user-select: none;
-      }
-      .draggable {
-        resize: both;
-        overflow: auto;
-      }
-    </style>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <style></style>
     <script>
       $(document).ready(function () {
-        $(".draggable").draggable({ handle: ".menu" });
+        // Create the window element in advance and initially hide it
+        var windowElement = $("<div>")
+          .addClass("window draggable win-wrapper")
+          .html(
+            '<div class="menu" autofocus><button class="close button"></button><button class="min button"></button><button class="max button"></button></div>'
+          )
+          .hide();
 
-        $(".draggable").on("click", function () {
-          $(this).css("z-index", 9999);
-          $(".draggable").not(this).css("z-index", "");
+        // Append the window to the body
+        $("body").append(windowElement);
+
+        // Make the window draggable
+        windowElement.draggable({ handle: ".menu" });
+
+        // Hide the window when clicking the "Close" button
+        windowElement.find(".close").on("click", function () {
+          windowElement.hide();
+        });
+
+        // Show or hide the pre-created window when the "app" button is clicked
+        $(".app").on("click", function () {
+          windowElement.toggle();
         });
       });
     </script>
   </head>
   <body>
-    <div id="draggable1" class="draggable win-wrapper">
-      <div class="menu"></div>
-    </div>
-    <div id="draggable2" class="draggable win-wrapper">
-      <div class="menu"></div>
-    </div>
-    <div id="draggable3" class="draggable win-wrapper">
-      <div class="menu"></div>
-    </div>
+    <!-- Button to show/hide the window -->
+    <button class="app">Show App</button>
   </body>
 </html>
