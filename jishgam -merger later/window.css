@@ -1,11 +1,12 @@
 * {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
 body {
   background-color: rgb(168, 168, 252);
-  margin: 0;
-  /* Reset default margin */
+
 }
 
 .win-wrapper {
